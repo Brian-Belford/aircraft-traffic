@@ -889,7 +889,20 @@ html&gt;body{padding:0}&lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;div id=&quot;traffic-pattern-sim&quot;&gt;
-  &lt;div class=&quot;tps-toolbar viz-controls&quot; aria-label=&quot;Simulation controls&quot;&gt;
+  &lt;div class=&quot;tps-setup&quot; id=&quot;tps-setup&quot;&gt;
+    &lt;div class=&quot;tps-setup-title&quot;&gt;Select aircraft &lt;span class=&quot;text-muted&quot;&gt;(maximum 8)&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;viz-controls&quot; aria-label=&quot;Aircraft selection&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn tps-add-aircraft&quot; data-type=&quot;C-5&quot;&gt;C-5&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn tps-add-aircraft&quot; data-type=&quot;C-17&quot;&gt;C-17&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn tps-add-aircraft&quot; data-type=&quot;F-22&quot;&gt;F-22&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn tps-add-aircraft&quot; data-type=&quot;F-15&quot;&gt;F-15&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn tps-add-aircraft&quot; data-type=&quot;T-6&quot;&gt;T-6&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn tps-add-aircraft&quot; data-type=&quot;C-130&quot;&gt;C-130&lt;/button&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;tps-selected-total&quot;&gt;0 / 8 aircraft selected&lt;/span&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;tps-begin&quot; disabled&gt;&lt;i data-lucide=&quot;play&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Begin&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;tps-toolbar viz-controls&quot; id=&quot;tps-toolbar&quot; aria-label=&quot;Simulation controls&quot; hidden&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;tps-toggle&quot;&gt;&lt;i data-lucide=&quot;pause&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Pause&lt;/button&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;tps-reset&quot;&gt;&lt;i data-lucide=&quot;rotate-ccw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Reset&lt;/button&gt;
     &lt;label class=&quot;form-label&quot; for=&quot;tps-speed&quot;&gt;Speed &lt;span id=&quot;tps-speed-value&quot;&gt;1x&lt;/span&gt;
@@ -899,63 +912,77 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;/div&gt;
 
   &lt;div class=&quot;tps-stage card&quot;&gt;
-    &lt;svg id=&quot;tps-svg&quot; viewBox=&quot;0 0 1000 620&quot; role=&quot;img&quot; aria-labelledby=&quot;tps-title tps-desc&quot;&gt;
+    &lt;svg id=&quot;tps-svg&quot; viewBox=&quot;0 0 3200 1700&quot; role=&quot;img&quot; aria-labelledby=&quot;tps-title tps-desc&quot;&gt;
       &lt;title id=&quot;tps-title&quot;&gt;Top-down aircraft traffic-pattern simulator&lt;/title&gt;
       &lt;desc id=&quot;tps-desc&quot;&gt;A runway with six aircraft flying a left traffic pattern. Select an aircraft to issue a control instruction.&lt;/desc&gt;
       &lt;defs&gt;
         &lt;marker id=&quot;tps-arrow&quot; markerWidth=&quot;8&quot; markerHeight=&quot;8&quot; refX=&quot;6&quot; refY=&quot;3&quot; orient=&quot;auto&quot;&gt;&lt;path d=&quot;M0,0 L0,6 L7,3 z&quot; class=&quot;tps-arrow-head&quot;/&gt;&lt;/marker&gt;
       &lt;/defs&gt;
-      &lt;rect class=&quot;tps-field&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;1000&quot; height=&quot;620&quot; rx=&quot;10&quot;/&gt;
-      &lt;path class=&quot;tps-pattern&quot; d=&quot;M85 310 L800 310 L915 260 L915 100 L245 100 L85 150 L85 310&quot; marker-end=&quot;url(#tps-arrow)&quot;/&gt;
-      &lt;text class=&quot;tps-leg-label&quot; x=&quot;565&quot; y=&quot;80&quot;&gt;DOWNWIND&lt;/text&gt;
-      &lt;text class=&quot;tps-leg-label&quot; x=&quot;67&quot; y=&quot;226&quot; transform=&quot;rotate(-90 67 226)&quot;&gt;BASE&lt;/text&gt;
-      &lt;text class=&quot;tps-leg-label&quot; x=&quot;145&quot; y=&quot;345&quot;&gt;FINAL&lt;/text&gt;
+      &lt;rect class=&quot;tps-field&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;3200&quot; height=&quot;1700&quot; rx=&quot;10&quot;/&gt;
+      &lt;path class=&quot;tps-pattern&quot; d=&quot;M850 1200 L2100 1200 L2100 300 L850 300 L850 1200&quot; marker-end=&quot;url(#tps-arrow)&quot;/&gt;
+      &lt;path class=&quot;tps-extension&quot; d=&quot;M850 300 L550 300 L550 1200 L850 1200&quot;/&gt;
+      &lt;path class=&quot;tps-extension&quot; d=&quot;M2100 1200 L2800 1200 L2800 300 L2100 300&quot;/&gt;
+      &lt;text class=&quot;tps-leg-label&quot; x=&quot;1475&quot; y=&quot;270&quot;&gt;DOWNWIND&lt;/text&gt;
+      &lt;text class=&quot;tps-leg-label&quot; x=&quot;820&quot; y=&quot;750&quot; transform=&quot;rotate(-90 820 750)&quot;&gt;BASE · 1.5 MI&lt;/text&gt;
+      &lt;text class=&quot;tps-leg-label&quot; x=&quot;1075&quot; y=&quot;1240&quot;&gt;FINAL&lt;/text&gt;
+      &lt;text class=&quot;tps-leg-label&quot; x=&quot;2450&quot; y=&quot;1240&quot;&gt;5 MI UPWIND TURN&lt;/text&gt;
       &lt;g class=&quot;tps-runway&quot;&gt;
-        &lt;rect x=&quot;210&quot; y=&quot;270&quot; width=&quot;580&quot; height=&quot;80&quot; rx=&quot;3&quot;/&gt;
-        &lt;line x1=&quot;240&quot; y1=&quot;310&quot; x2=&quot;760&quot; y2=&quot;310&quot;/&gt;
-        &lt;path d=&quot;M230 282v56 M245 282v56 M755 282v56 M770 282v56&quot;/&gt;
-        &lt;text x=&quot;255&quot; y=&quot;303&quot;&gt;09&lt;/text&gt;&lt;text x=&quot;725&quot; y=&quot;334&quot;&gt;27&lt;/text&gt;
+        &lt;rect x=&quot;1300&quot; y=&quot;1160&quot; width=&quot;597&quot; height=&quot;80&quot; rx=&quot;3&quot;/&gt;
+        &lt;line x1=&quot;1325&quot; y1=&quot;1200&quot; x2=&quot;1872&quot; y2=&quot;1200&quot;/&gt;
+        &lt;path d=&quot;M1312 1172v56 M1324 1172v56 M1873 1172v56 M1885 1172v56&quot;/&gt;
+        &lt;text x=&quot;1348&quot; y=&quot;1193&quot;&gt;09&lt;/text&gt;&lt;text x=&quot;1849&quot; y=&quot;1224&quot;&gt;27&lt;/text&gt;
       &lt;/g&gt;
-      &lt;g class=&quot;tps-tower&quot;&gt;&lt;circle cx=&quot;500&quot; cy=&quot;205&quot; r=&quot;17&quot;/&gt;&lt;path d=&quot;M488 222l-8 35h40l-8-35z&quot;/&gt;&lt;text x=&quot;500&quot; y=&quot;185&quot;&gt;TOWER&lt;/text&gt;&lt;/g&gt;
+      &lt;text class=&quot;tps-leg-label&quot; x=&quot;1599&quot; y=&quot;1270&quot;&gt;RUNWAY · 10,500 FT&lt;/text&gt;
+      &lt;g class=&quot;tps-distance-marks&quot; aria-label=&quot;Runway-distance reference lines at 3000, 4500, and 6000 feet&quot;&gt;&lt;path d=&quot;M1471 1060v80 M1556 1060v80 M1641 1060v80&quot;/&gt;&lt;/g&gt;
+      &lt;g class=&quot;tps-tower&quot;&gt;&lt;circle cx=&quot;1600&quot; cy=&quot;1480&quot; r=&quot;17&quot;/&gt;&lt;path d=&quot;M1588 1497l-8 35h40l-8-35z&quot;/&gt;&lt;text x=&quot;1600&quot; y=&quot;1460&quot;&gt;TOWER&lt;/text&gt;&lt;/g&gt;
+      &lt;g class=&quot;tps-scale&quot;&gt;&lt;path d=&quot;M2700 1580h300m-300-10v20m300-20v20&quot;/&gt;&lt;text x=&quot;2850&quot; y=&quot;1555&quot;&gt;1 MILE&lt;/text&gt;&lt;/g&gt;
       &lt;g id=&quot;tps-aircraft-layer&quot;&gt;&lt;/g&gt;
     &lt;/svg&gt;
-    &lt;div id=&quot;tps-menu&quot; class=&quot;tps-menu card&quot; hidden&gt;
-      &lt;div class=&quot;tps-menu-head&quot;&gt;&lt;span id=&quot;tps-selected-name&quot;&gt;Aircraft&lt;/span&gt;&lt;button type=&quot;button&quot; class=&quot;btn btn-ghost&quot; id=&quot;tps-close&quot; aria-label=&quot;Close commands&quot;&gt;&lt;i data-lucide=&quot;x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
+    &lt;div id=&quot;tps-menu&quot; class=&quot;tps-menu card&quot;&gt;
+      &lt;div class=&quot;tps-menu-head&quot;&gt;&lt;span id=&quot;tps-selected-name&quot;&gt;Select an aircraft&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;tps-command-grid&quot; role=&quot;group&quot; aria-label=&quot;ATC instructions&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class=&quot;tps-detail&quot; aria-live=&quot;polite&quot;&gt;&lt;strong id=&quot;tps-detail-call&quot;&gt;Select an aircraft&lt;/strong&gt;&lt;span id=&quot;tps-detail-text&quot;&gt;Click any aircraft to issue an instruction.&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;tps-detail&quot; aria-live=&quot;polite&quot;&gt;&lt;strong id=&quot;tps-detail-call&quot;&gt;Select aircraft&lt;/strong&gt;&lt;span id=&quot;tps-detail-text&quot;&gt;Add up to 8 aircraft, then click Begin.&lt;/span&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;style&gt;
 #traffic-pattern-sim{color-scheme:light dark;--tps-field:light-dark(#dbe8ce,#173a29);--tps-field-line:light-dark(#52684b,#b8d4ae);--tps-runway:light-dark(#3e454b,#b8bec4);--tps-runway-mark:light-dark(#f7f7f3,#24282d);--tps-plane:light-dark(#1769aa,#72b7ef);--tps-plane-edge:light-dark(#10232f,#071018);--tps-label-bg:light-dark(#fff,#172029);--tps-label-text:light-dark(#172029,#f5f7f8);--tps-tower:light-dark(#e59b31,#ffc466);--tps-menu-bg:light-dark(#fff,#202830);--tps-menu-text:light-dark(#111820,#f5f7f8);color:var(--foreground);font-family:inherit;width:100%}
 #traffic-pattern-sim .tps-toolbar{margin-bottom:10px;align-items:center}
+#traffic-pattern-sim .tps-setup{margin-bottom:10px}
+#traffic-pattern-sim .tps-setup-title{font-weight:500;margin-bottom:8px}
 #traffic-pattern-sim .tps-toolbar .form-label{min-width:150px;margin:0}
 #traffic-pattern-sim .tps-stage{position:relative;padding:0;overflow:hidden;background:var(--tps-field);}
 #traffic-pattern-sim #tps-svg{display:block;width:100%;height:auto;min-height:280px}
-#traffic-pattern-sim .tps-field{fill:var(--tps-field);stroke:var(--tps-field-line);stroke-width:2}
-#traffic-pattern-sim .tps-pattern{fill:none;stroke:var(--tps-field-line);stroke-width:3;stroke-dasharray:10 9;opacity:.9}
+#traffic-pattern-sim .tps-field{fill:var(--tps-field);stroke:var(--tps-field-line);stroke-width:5}
+#traffic-pattern-sim .tps-pattern{fill:none;stroke:var(--tps-field-line);stroke-width:7;stroke-dasharray:22 20;opacity:.9}
+#traffic-pattern-sim .tps-extension{fill:none;stroke:var(--tps-field-line);stroke-width:5;stroke-dasharray:12 22;opacity:.38}
 #traffic-pattern-sim .tps-arrow-head{fill:var(--tps-field-line)}
-#traffic-pattern-sim .tps-leg-label{fill:var(--tps-field-line);font-size:12px;font-weight:500;letter-spacing:2px;text-anchor:middle}
+#traffic-pattern-sim .tps-leg-label{fill:var(--tps-field-line);font-size:28px;font-weight:500;letter-spacing:4px;text-anchor:middle}
 #traffic-pattern-sim .tps-runway rect{fill:var(--tps-runway);stroke:var(--tps-plane-edge);stroke-width:3}
 #traffic-pattern-sim .tps-runway line,#traffic-pattern-sim .tps-runway path{stroke:var(--tps-runway-mark);stroke-width:4;stroke-dasharray:24 18;fill:none}
 #traffic-pattern-sim .tps-runway path{stroke-dasharray:none;stroke-width:3}
-#traffic-pattern-sim .tps-runway text{fill:var(--tps-runway-mark);font-size:18px;font-weight:500;text-anchor:middle}
+#traffic-pattern-sim .tps-runway text{fill:var(--tps-runway-mark);font-size:34px;font-weight:500;text-anchor:middle}
 #traffic-pattern-sim .tps-tower circle,#traffic-pattern-sim .tps-tower path{fill:var(--tps-tower);stroke:var(--tps-plane-edge);stroke-width:2}
-#traffic-pattern-sim .tps-tower text{fill:var(--tps-label-text);font-size:11px;font-weight:500;text-anchor:middle}
+#traffic-pattern-sim .tps-tower text{fill:var(--tps-label-text);font-size:26px;font-weight:500;text-anchor:middle}
+#traffic-pattern-sim .tps-distance-marks path{fill:none;stroke:var(--tps-field-line);stroke-width:4}
+#traffic-pattern-sim .tps-scale path{fill:none;stroke:var(--tps-field-line);stroke-width:3}
+#traffic-pattern-sim .tps-scale text{fill:var(--tps-field-line);font-size:28px;font-weight:500;text-anchor:middle}
 #traffic-pattern-sim .tps-plane{cursor:pointer;outline:none}
 #traffic-pattern-sim .tps-plane .hit{fill:transparent}
 #traffic-pattern-sim .tps-plane .body{fill:var(--tps-plane);stroke:var(--tps-plane-edge);stroke-width:2}
+#traffic-pattern-sim .tps-plane .aircraft-detail{fill:var(--tps-label-bg);stroke:var(--tps-plane-edge);stroke-width:1.2}
+#traffic-pattern-sim .tps-plane .aircraft-line{fill:none;stroke:var(--tps-plane-edge);stroke-width:1.4}
 #traffic-pattern-sim .tps-plane.selected .body{fill:var(--tps-tower);stroke:var(--tps-plane-edge);stroke-width:4}
 #traffic-pattern-sim .tps-plane .tag{fill:var(--tps-label-bg);stroke:var(--tps-plane-edge);stroke-width:1.5}
 #traffic-pattern-sim .tps-plane .tag-text{fill:var(--tps-label-text);font-size:12px;font-weight:500;text-anchor:middle;pointer-events:none}
-#traffic-pattern-sim .tps-menu{position:absolute;z-index:5;width:min(310px,calc(100% - 20px));padding:12px;background:var(--tps-menu-bg);color:var(--tps-menu-text)}
-#traffic-pattern-sim .tps-menu-head{display:flex;align-items:center;justify-content:space-between;font-weight:500;margin-bottom:8px}
-#traffic-pattern-sim .tps-command-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#traffic-pattern-sim .tps-menu{position:absolute;z-index:5;top:21%;left:46%;transform:translateX(-50%);width:30%;padding:8px;background:var(--tps-menu-bg);color:var(--tps-menu-text)}
+#traffic-pattern-sim .tps-menu-head{display:flex;align-items:center;justify-content:center;font-weight:500;margin-bottom:6px}
+#traffic-pattern-sim .tps-command-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
 #traffic-pattern-sim .tps-command-grid .btn{white-space:normal;text-align:left}
 #traffic-pattern-sim .tps-detail{display:flex;gap:10px;align-items:baseline;min-height:26px;padding:10px 2px 0;flex-wrap:wrap}
 #traffic-pattern-sim .tps-detail span{color:var(--muted-foreground)}
-@media(max-width:520px){#traffic-pattern-sim .tps-command-grid{grid-template-columns:1fr}#traffic-pattern-sim .tps-menu{max-height:245px;overflow:auto}#traffic-pattern-sim .tps-stage{overflow:visible}#traffic-pattern-sim .tps-menu{position:static;width:auto;margin:8px}.tps-toolbar .form-label{width:100%}}
+@media(max-width:700px){#traffic-pattern-sim .tps-command-grid{grid-template-columns:1fr 1fr}#traffic-pattern-sim .tps-stage{overflow:visible}#traffic-pattern-sim .tps-menu{position:static;transform:none;width:auto;margin:8px}.tps-toolbar .form-label{width:100%}}
 @media(prefers-reduced-motion:reduce){#traffic-pattern-sim *{scroll-behavior:auto}}
 &lt;/style&gt;
 
@@ -966,30 +993,54 @@ html&gt;body{padding:0}&lt;/style&gt;
   const menu=root.querySelector(&#x27;#tps-menu&#x27;), menuName=root.querySelector(&#x27;#tps-selected-name&#x27;);
   const detailCall=root.querySelector(&#x27;#tps-detail-call&#x27;), detailText=root.querySelector(&#x27;#tps-detail-text&#x27;);
   const toggle=root.querySelector(&#x27;#tps-toggle&#x27;), speedInput=root.querySelector(&#x27;#tps-speed&#x27;), speedValue=root.querySelector(&#x27;#tps-speed-value&#x27;);
-  const commands=[&#x27;Clear to land&#x27;,&#x27;Cleared touch and go&#x27;,&#x27;Cleared low approach&#x27;,&#x27;Go around&#x27;,&#x27;Turn base now&#x27;,&#x27;Extend downwind 1 mile&#x27;,&#x27;Make right 360&#x27;];
-  const specs=[[&#x27;REACH 51&#x27;,&#x27;C-5&#x27;,0.03,.72],[&#x27;MOOSE 22&#x27;,&#x27;C-17&#x27;,0.18,.9],[&#x27;RAPTOR 11&#x27;,&#x27;F-22&#x27;,0.34,1.38],[&#x27;EAGLE 21&#x27;,&#x27;F-15&#x27;,0.50,1.28],[&#x27;TEXAN 06&#x27;,&#x27;T-6&#x27;,0.67,.68],[&#x27;HERC 41&#x27;,&#x27;C-130&#x27;,0.83,.82]];
-  const initial=()=&gt;specs.map((s,i)=&gt;({call:s[0],type:s[1],p:s[2],speedFactor:s[3],command:`In pattern - ${Math.round(s[3]*120)} kt`,mode:&#x27;pattern&#x27;,turn360:null,hold:0,index:i}));
-  let planes=initial(), selected=null, running=true, speed=1, last=performance.now();
+  const setup=root.querySelector(&#x27;#tps-setup&#x27;),toolbar=root.querySelector(&#x27;#tps-toolbar&#x27;),begin=root.querySelector(&#x27;#tps-begin&#x27;),selectedTotal=root.querySelector(&#x27;#tps-selected-total&#x27;);
+  const commands=[&#x27;Cleared to land&#x27;,&#x27;Go Around&#x27;,&#x27;Cleared Touch and Go&#x27;,&#x27;Cleared Low Approach&#x27;,&#x27;Make Right 360&#x27;,&#x27;Extend Downwind one mile&#x27;,&#x27;Make Short Approach&#x27;,&#x27;Extend Upwind&#x27;,&#x27;Enter Left Traffic&#x27;];
+  const aircraftDefs={
+    &#x27;C-5&#x27;:{prefix:&#x27;REACH&#x27;,start:51,speed:.72},&#x27;C-17&#x27;:{prefix:&#x27;MOOSE&#x27;,start:22,speed:.9},
+    &#x27;F-22&#x27;:{prefix:&#x27;RAPTOR&#x27;,start:11,speed:1.38},&#x27;F-15&#x27;:{prefix:&#x27;EAGLE&#x27;,start:21,speed:1.28},
+    &#x27;T-6&#x27;:{prefix:&#x27;TEXAN&#x27;,start:6,speed:.68},&#x27;C-130&#x27;:{prefix:&#x27;HERC&#x27;,start:41,speed:.82}
+  };
+  const spawnSlots=[.03,.15,.27,.39,.51,.63,.75,.87];
+  let planes=[], selected=null, running=false, speed=1, last=performance.now();
+  function initialInstruction(d){return `Ready - ${Math.round(d.speed*120)} kt`}
+  function createPlane(type){
+    const d=aircraftDefs[type],number=d.start+planes.filter(p=&gt;p.type===type).length;
+    const initialCommand=initialInstruction(d);
+    return{call:`${d.prefix} ${String(number).padStart(2,&#x27;0&#x27;)}`,type,p:spawnSlots[planes.length],speedFactor:d.speed,initialCommand,command:initialCommand,mode:&#x27;pattern&#x27;,thresholdLatched:false,runwaySeen:false,touchStarted:false,slowTimer:0,turn360:null,extension:null,shortApproach:null,upwindExtension:null,closedEntry:null,hold:0,index:planes.length}
+  }
   const NS=&#x27;http://www.w3.org/2000/svg&#x27;;
-  const pattern=[{x:85,y:310},{x:800,y:310},{x:915,y:260},{x:915,y:100},{x:245,y:100},{x:85,y:150}];
+  const pattern=[{x:850,y:1200},{x:2100,y:1200},{x:2100,y:750},{x:2100,y:300},{x:850,y:300},{x:850,y:750}];
   const pathLengths=pattern.map((a,i)=&gt;{const b=pattern[(i+1)%pattern.length];return Math.hypot(b.x-a.x,b.y-a.y)});
   const pathTotal=pathLengths.reduce((a,b)=&gt;a+b,0);
   function progressAtVertex(index){return pathLengths.slice(0,index).reduce((a,b)=&gt;a+b,0)/pathTotal}
+  function progressOnDownwind(x){const clamped=Math.max(850,Math.min(2100,x)),t=(2100-clamped)/1250;return (pathLengths.slice(0,3).reduce((a,b)=&gt;a+b,0)+pathLengths[3]*t)/pathTotal}
+  function progressOnFinal(x){const clamped=Math.max(850,Math.min(2100,x));return (clamped-850)/pathTotal}
   function pointOnPath(p){
     p=((p%1)+1)%1; let d=p*pathTotal;
     for(let i=0;i&lt;pattern.length;i++){const a=pattern[i],b=pattern[(i+1)%pattern.length],l=pathLengths[i];if(d&lt;=l){const t=d/l;return{x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t,angle:Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI,segment:i}}d-=l}
-    return{x:85,y:310,angle:0,segment:0};
+    return{x:850,y:1200,angle:0,segment:0};
   }
   function displayPoint(p){
-    if(!p.turn360)return pointOnPath(p.p);
-    const t=p.turn360;
-    return{x:t.cx+Math.cos(t.theta)*t.radius,y:t.cy+Math.sin(t.theta)*t.radius,angle:t.theta*180/Math.PI+90,segment:-1};
+    if(p.turn360){const t=p.turn360;return{x:t.cx+Math.cos(t.theta)*t.radius,y:t.cy+Math.sin(t.theta)*t.radius,angle:t.theta*180/Math.PI+90,segment:-1}}
+    if(p.extension&amp;&amp;p.extension.phase!==&#x27;await&#x27;)return{x:p.extension.x,y:p.extension.y,angle:p.extension.angle,segment:-2};
+    if(p.shortApproach&amp;&amp;p.shortApproach.phase!==&#x27;await&#x27;){
+      const s=p.shortApproach;
+      return{x:s.x,y:s.y,angle:s.angle,segment:-5}
+    }
+    if(p.upwindExtension&amp;&amp;p.upwindExtension.phase!==&#x27;await&#x27;)return{x:p.upwindExtension.x,y:p.upwindExtension.y,angle:p.upwindExtension.angle,segment:-3};
+    if(p.closedEntry)return{x:p.closedEntry.x,y:p.closedEntry.y,angle:p.closedEntry.angle,segment:-4};
+    return pointOnPath(p.p);
   }
   function silhouette(type){
-    const scale={&#x27;C-5&#x27;:1.45,&#x27;C-17&#x27;:1.25,&#x27;F-22&#x27;:.85,&#x27;F-15&#x27;:.9,&#x27;T-6&#x27;:.72,&#x27;C-130&#x27;:1.15}[type];
-    const swept=type===&#x27;F-22&#x27;||type===&#x27;F-15&#x27;;
-    const d=swept?&#x27;M18 0 L3 -7 L-4 -20 L-8 -19 L-5 -5 L-19 -2 L-19 2 L-5 5 L-8 19 L-4 20 L3 7 L18 0 Z&#x27;:&#x27;M20 0 L3 -4 L-2 -20 L-7 -20 L-6 -4 L-19 -2 L-19 2 L-6 4 L-7 20 L-2 20 L3 4 L20 0 Z&#x27;;
-    return `&lt;path class=&quot;body&quot; d=&quot;${d}&quot; transform=&quot;scale(${scale})&quot;/&gt;`;
+    const shapes={
+      &#x27;C-5&#x27;:`&lt;g transform=&quot;scale(1.08)&quot;&gt;&lt;path class=&quot;body&quot; d=&quot;M30 0C27-3 22-4 13-4L5-5-6-27h-6l4 22-12 2-7-8h-4l4 10-5 1 5 1-4 10h4l7-8 12 2-4 22h6L5 5l8-1c9 0 14-1 17-4Z&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;1&quot; cy=&quot;-13&quot; rx=&quot;4&quot; ry=&quot;2.5&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;1&quot; cy=&quot;13&quot; rx=&quot;4&quot; ry=&quot;2.5&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;-5&quot; cy=&quot;-20&quot; rx=&quot;4&quot; ry=&quot;2.5&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;-5&quot; cy=&quot;20&quot; rx=&quot;4&quot; ry=&quot;2.5&quot;/&gt;&lt;/g&gt;`,
+      &#x27;C-17&#x27;:`&lt;g&gt;&lt;path class=&quot;body&quot; d=&quot;M29 0C26-3 20-4 12-4L5-5-7-24h-6l5 20-12 2-6-7h-4l4 9-4 9h4l6-7 12 2-5 20h6L5 5l7-1c8 0 14-1 17-4Z&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;0&quot; cy=&quot;-13&quot; rx=&quot;4&quot; ry=&quot;2.4&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;0&quot; cy=&quot;13&quot; rx=&quot;4&quot; ry=&quot;2.4&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;-5&quot; cy=&quot;-19&quot; rx=&quot;3.5&quot; ry=&quot;2.2&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;-5&quot; cy=&quot;19&quot; rx=&quot;3.5&quot; ry=&quot;2.2&quot;/&gt;&lt;/g&gt;`,
+      &#x27;F-22&#x27;:`&lt;g transform=&quot;scale(.92)&quot;&gt;&lt;path class=&quot;body&quot; d=&quot;M30 0 13-7 2-19-5-22-3-8-20-14-14-3-25 0-14 3-20 14-3 8-5 22 2 19 13 7Z&quot;/&gt;&lt;path class=&quot;aircraft-detail&quot; d=&quot;M4-5-4-12-1-4ZM4 5-4 12-1 4Z&quot;/&gt;&lt;path class=&quot;aircraft-line&quot; d=&quot;M14 0H-13&quot;/&gt;&lt;/g&gt;`,
+      &#x27;F-15&#x27;:`&lt;g transform=&quot;scale(.92)&quot;&gt;&lt;path class=&quot;body&quot; d=&quot;M31 0 17-5 5-18-2-20 1-7-13-5-22-12-20-3-28 0-20 3-22 12-13 5 1 7-2 20 5 18 17 5Z&quot;/&gt;&lt;path class=&quot;aircraft-detail&quot; d=&quot;M-7-5-16-15-12-4ZM-7 5-16 15-12 4Z&quot;/&gt;&lt;path class=&quot;aircraft-line&quot; d=&quot;M15 0H-20&quot;/&gt;&lt;/g&gt;`,
+      &#x27;T-6&#x27;:`&lt;g transform=&quot;scale(.82)&quot;&gt;&lt;path class=&quot;body&quot; d=&quot;M28 0C25-3 18-3 9-3L2-4-3-20h-5l2 16-13 2-5-6h-3l3 8-3 8h3l5-6 13 2-2 16h5L2 4l7-1c9 0 16 0 19-3Z&quot;/&gt;&lt;ellipse class=&quot;aircraft-detail&quot; cx=&quot;8&quot; cy=&quot;0&quot; rx=&quot;7&quot; ry=&quot;2.6&quot;/&gt;&lt;path class=&quot;aircraft-line&quot; d=&quot;M24-9v18M21-8l6 16M21 8l6-16&quot;/&gt;&lt;/g&gt;`,
+      &#x27;C-130&#x27;:`&lt;g&gt;&lt;path class=&quot;body&quot; d=&quot;M28 0C25-3 20-4 11-4L4-5 1-27h-6L-6-5l-12 2-7-8h-4l4 10-5 1 5 1-4 10h4l7-8 12 2 1 22h6L4 5l7-1c9 0 14-1 17-4Z&quot;/&gt;&lt;rect class=&quot;aircraft-detail&quot; x=&quot;0&quot; y=&quot;-20&quot; width=&quot;7&quot; height=&quot;5&quot; rx=&quot;2&quot;/&gt;&lt;rect class=&quot;aircraft-detail&quot; x=&quot;0&quot; y=&quot;15&quot; width=&quot;7&quot; height=&quot;5&quot; rx=&quot;2&quot;/&gt;&lt;rect class=&quot;aircraft-detail&quot; x=&quot;3&quot; y=&quot;-12&quot; width=&quot;7&quot; height=&quot;5&quot; rx=&quot;2&quot;/&gt;&lt;rect class=&quot;aircraft-detail&quot; x=&quot;3&quot; y=&quot;7&quot; width=&quot;7&quot; height=&quot;5&quot; rx=&quot;2&quot;/&gt;&lt;/g&gt;`
+    };
+    return shapes[type];
   }
   function renderPlanes(){
     layer.innerHTML=&#x27;&#x27;;
@@ -998,56 +1049,155 @@ html&gt;body{padding:0}&lt;/style&gt;
       const q=displayPoint(p),g=document.createElementNS(NS,&#x27;g&#x27;);
       g.setAttribute(&#x27;class&#x27;,&#x27;tps-plane&#x27;+(selected===i?&#x27; selected&#x27;:&#x27;&#x27;));g.setAttribute(&#x27;role&#x27;,&#x27;button&#x27;);g.setAttribute(&#x27;aria-label&#x27;,`${p.call}, ${p.type}, ${p.command}`);g.setAttribute(&#x27;focusable&#x27;,&#x27;true&#x27;);
       g.setAttribute(&#x27;transform&#x27;,`translate(${q.x} ${q.y})`);
-      g.innerHTML=`&lt;circle class=&quot;hit&quot; r=&quot;35&quot;/&gt;&lt;g transform=&quot;rotate(${q.angle})&quot;&gt;${silhouette(p.type)}&lt;/g&gt;&lt;g transform=&quot;translate(0 -36)&quot;&gt;&lt;rect class=&quot;tag&quot; x=&quot;-40&quot; y=&quot;-12&quot; width=&quot;80&quot; height=&quot;22&quot; rx=&quot;4&quot;/&gt;&lt;text class=&quot;tag-text&quot; y=&quot;4&quot;&gt;${p.call}&lt;/text&gt;&lt;/g&gt;`;
+      g.innerHTML=`&lt;circle class=&quot;hit&quot; r=&quot;75&quot;/&gt;&lt;g transform=&quot;rotate(${q.angle}) scale(2)&quot;&gt;${silhouette(p.type)}&lt;/g&gt;&lt;g transform=&quot;translate(0 -76) scale(2)&quot;&gt;&lt;rect class=&quot;tag&quot; x=&quot;-40&quot; y=&quot;-12&quot; width=&quot;80&quot; height=&quot;22&quot; rx=&quot;4&quot;/&gt;&lt;text class=&quot;tag-text&quot; y=&quot;4&quot;&gt;${p.call}&lt;/text&gt;&lt;/g&gt;`;
       g.addEventListener(&#x27;pointerdown&#x27;,e=&gt;{e.preventDefault();selectPlane(i,e)});g.addEventListener(&#x27;keydown&#x27;,e=&gt;{if(e.key===&#x27;Enter&#x27;||e.key===&#x27; &#x27;){e.preventDefault();selectPlane(i,e)}});layer.appendChild(g);
     });
   }
-  function selectPlane(i,e){selected=i;renderPlanes();const p=planes[i];menuName.textContent=`${p.call} - ${p.type}`;detailCall.textContent=`${p.call} - ${p.type}`;detailText.textContent=p.command;menu.hidden=false;
-    if(innerWidth&gt;520){const stage=root.querySelector(&#x27;.tps-stage&#x27;),r=stage.getBoundingClientRect(),pt=displayPoint(p);let left=pt.x/1000*r.width+18,top=pt.y/620*r.height+18;left=Math.min(left,r.width-320);top=Math.min(top,r.height-280);menu.style.left=Math.max(10,left)+&#x27;px&#x27;;menu.style.top=Math.max(10,top)+&#x27;px&#x27;}
-  }
+  function selectPlane(i,e){if(!setup.hidden)return;selected=i;renderPlanes();const p=planes[i];menuName.textContent=`${p.call} - ${p.type}`;detailCall.textContent=`${p.call} - ${p.type}`;detailText.textContent=p.command;updateCommandState()}
   function issue(cmd){if(selected===null)return;const p=planes[selected];p.command=cmd;
-    if(cmd===&#x27;Go around&#x27;)p.p=progressAtVertex(1);
-    if(cmd===&#x27;Turn base now&#x27;)p.p=progressAtVertex(5);
-    if(cmd===&#x27;Extend downwind 1 mile&#x27;){p.p=Math.max(progressAtVertex(4)-.025,0);p.hold=3.8}
-    if(cmd===&#x27;Make right 360&#x27;){
-      const q=pointOnPath(p.p),heading=q.angle*Math.PI/180,radius=40;
+    if(cmd===&#x27;Go Around&#x27;){p.mode=&#x27;goaround&#x27;;p.runwaySeen=false}
+    if(cmd===&#x27;Extend Downwind one mile&#x27;){p.shortApproach=null;p.extension={phase:&#x27;await&#x27;,x:0,y:0,angle:180}}
+    if(cmd===&#x27;Make Short Approach&#x27;){
+      p.extension=null;p.upwindExtension=null;p.closedEntry=null;
+      p.shortApproach={phase:&#x27;await&#x27;,x:0,y:0,angle:90};
+    }
+    if(cmd===&#x27;Extend Upwind&#x27;){
+      p.slowTimer=0;p.touchStarted=false;p.mode=&#x27;upwind&#x27;;p.extension=null;p.shortApproach=null;p.closedEntry=null;
+      p.upwindExtension={phase:&#x27;await&#x27;,x:0,y:0,angle:0};
+    }
+    if(cmd===&#x27;Enter Left Traffic&#x27;){
+      const q=displayPoint(p),targetX=Math.max(440,Math.min(2040,q.x));
+      p.slowTimer=0;p.touchStarted=false;p.mode=&#x27;closed&#x27;;p.extension=null;p.shortApproach=null;p.upwindExtension=null;p.turn360=null;
+      p.closedEntry={x:q.x,y:q.y,targetX,targetY:300,angle:Math.atan2(300-q.y,targetX-q.x)*180/Math.PI};
+    }
+    if(cmd===&#x27;Make Right 360&#x27;){
+      const q=displayPoint(p),heading=q.angle*Math.PI/180,radius=40;
       const cx=q.x-Math.sin(heading)*radius,cy=q.y+Math.cos(heading)*radius;
       p.turn360={cx,cy,radius,theta:Math.atan2(q.y-cy,q.x-cx),remaining:Math.PI*2};
     }
-    if(cmd===&#x27;Clear to land&#x27;)p.mode=&#x27;land&#x27;;
-    if(cmd===&#x27;Cleared touch and go&#x27;)p.mode=&#x27;touch&#x27;;
-    if(cmd===&#x27;Cleared low approach&#x27;)p.mode=&#x27;low&#x27;;
-    detailText.textContent=cmd;menu.hidden=true;renderPlanes();
+    if(cmd===&#x27;Cleared to land&#x27;)p.mode=&#x27;land&#x27;;
+    if(cmd===&#x27;Cleared Touch and Go&#x27;){p.mode=&#x27;touch&#x27;;p.touchStarted=false;p.slowTimer=0}
+    if(cmd===&#x27;Cleared Low Approach&#x27;){p.mode=&#x27;low&#x27;;p.runwaySeen=false}
+    detailText.textContent=cmd;renderPlanes();
+  }
+  function resetApproachMemory(p){
+    p.extension=null;p.shortApproach=null;p.closedEntry=null;p.turn360=null;p.runwaySeen=false;
+    if(!p.upwindExtension&amp;&amp;p.mode!==&#x27;touch&#x27;&amp;&amp;p.mode!==&#x27;land&#x27;)p.mode=&#x27;pattern&#x27;;
+    if(p.mode===&#x27;pattern&#x27;)p.command=p.initialCommand;
   }
   const grid=menu.querySelector(&#x27;.tps-command-grid&#x27;);
-  commands.forEach((c,i)=&gt;{const b=document.createElement(&#x27;button&#x27;);b.type=&#x27;button&#x27;;b.className=&#x27;btn&#x27;+(i===0?&#x27; btn-primary&#x27;:&#x27;&#x27;);b.textContent=c;b.addEventListener(&#x27;click&#x27;,()=&gt;issue(c));grid.appendChild(b)});
-  root.querySelector(&#x27;#tps-close&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;menu.hidden=true);
+  commands.forEach((c,i)=&gt;{const b=document.createElement(&#x27;button&#x27;);b.type=&#x27;button&#x27;;b.className=&#x27;btn text-small&#x27;+(i===0?&#x27; btn-primary&#x27;:&#x27;&#x27;);b.textContent=c;b.disabled=true;b.addEventListener(&#x27;click&#x27;,()=&gt;issue(c));grid.appendChild(b)});
+  function updateCommandState(){grid.querySelectorAll(&#x27;button&#x27;).forEach(b=&gt;b.disabled=selected===null)}
+  function updateSetup(){
+    selectedTotal.textContent=`${planes.length} / 8 aircraft selected`;
+    begin.disabled=planes.length===0;
+    root.querySelectorAll(&#x27;.tps-add-aircraft&#x27;).forEach(b=&gt;b.disabled=planes.length&gt;=8);
+  }
+  root.querySelectorAll(&#x27;.tps-add-aircraft&#x27;).forEach(b=&gt;b.addEventListener(&#x27;click&#x27;,()=&gt;{
+    if(planes.length&gt;=8)return;
+    planes.push(createPlane(b.dataset.type));
+    updateSetup();renderPlanes();
+    detailCall.textContent=`${b.dataset.type} added`;detailText.textContent=`${planes.length} of 8 aircraft selected.`;
+  }));
+  begin.addEventListener(&#x27;click&#x27;,()=&gt;{
+    if(planes.length===0)return;
+    setup.hidden=true;toolbar.hidden=false;running=true;last=performance.now();
+    detailCall.textContent=&#x27;Simulation running&#x27;;detailText.textContent=`${planes.length} aircraft entered the pattern.`;
+  });
   toggle.addEventListener(&#x27;click&#x27;,()=&gt;{running=!running;toggle.innerHTML=`&lt;i data-lucide=&quot;${running?&#x27;pause&#x27;:&#x27;play&#x27;}&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; ${running?&#x27;Pause&#x27;:&#x27;Resume&#x27;}`;if(window.lucide)lucide.createIcons({attrs:{width:16,height:16}})});
   speedInput.addEventListener(&#x27;input&#x27;,()=&gt;{speed=+speedInput.value;speedValue.textContent=speed+&#x27;x&#x27;});
-  root.querySelector(&#x27;#tps-reset&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{planes=initial();selected=null;menu.hidden=true;detailCall.textContent=&#x27;Select an aircraft&#x27;;detailText.textContent=&#x27;Click any aircraft to issue an instruction.&#x27;;renderPlanes()});
+  root.querySelector(&#x27;#tps-reset&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{
+    planes=[];selected=null;running=false;setup.hidden=false;toolbar.hidden=true;menuName.textContent=&#x27;Select an aircraft&#x27;;updateCommandState();
+    toggle.innerHTML=&#x27;&lt;i data-lucide=&quot;pause&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Pause&#x27;;
+    detailCall.textContent=&#x27;Select aircraft&#x27;;detailText.textContent=&#x27;Add up to 8 aircraft, then click Begin.&#x27;;
+    updateSetup();renderPlanes();if(window.lucide)lucide.createIcons({attrs:{width:16,height:16}})
+  });
   function tick(now){
     const dt=Math.min(.05,(now-last)/1000);last=now;
     if(running){
       const landed=[];
       planes.forEach((p,i)=&gt;{
         if(p.hold&gt;0){p.hold-=dt*speed;return}
+        if(p.slowTimer&gt;0){
+          p.slowTimer=Math.max(0,p.slowTimer-dt*speed);
+          if(p.slowTimer===0&amp;&amp;p.mode===&#x27;touch&#x27;){p.mode=&#x27;pattern&#x27;;p.touchStarted=false;p.command=p.initialCommand}
+        }
+        const activeSpeed=p.speedFactor*(p.slowTimer&gt;0 ? 0.4 : 1);
         if(p.turn360){
-          const step=Math.min(p.turn360.remaining,dt*speed*(1.15*p.speedFactor));
+          const step=Math.min(p.turn360.remaining,dt*speed*(1.15*activeSpeed));
           p.turn360.theta+=step;p.turn360.remaining-=step;
           if(p.turn360.remaining&lt;=.0001){p.turn360=null;p.command=&#x27;Right 360 complete - rejoined pattern&#x27;}
           return
         }
-        p.p+=dt*.018*speed*p.speedFactor;
+        if(p.closedEntry){
+          const e=p.closedEntry,dx=e.targetX-e.x,dy=e.targetY-e.y,d=Math.hypot(dx,dy),travel=pathTotal*.018*speed*activeSpeed*dt;
+          if(d&lt;=travel){e.x=e.targetX;e.y=e.targetY;p.p=progressOnDownwind(e.targetX);p.closedEntry=null;p.mode=&#x27;pattern&#x27;;p.command=&#x27;Entered left closed traffic - established downwind&#x27;}
+          else{e.x+=dx/d*travel;e.y+=dy/d*travel;e.angle=Math.atan2(dy,dx)*180/Math.PI}
+          return
+        }
+        if(p.shortApproach){
+          const s=p.shortApproach,q=pointOnPath(p.p),travel=pathTotal*.018*speed*activeSpeed*dt;
+          if(s.phase===&#x27;await&#x27;){
+            if(q.segment===3&amp;&amp;q.x&lt;=1300){p.shortApproach={phase:&#x27;base&#x27;,x:q.x,y:q.y,angle:90};p.command=&#x27;Short approach - present-position base&#x27;}
+            else p.p+=dt*.018*speed*activeSpeed
+          }else if(s.phase===&#x27;base&#x27;){
+            s.y+=travel;
+            if(s.y&gt;=1200){s.y=1200;p.p=progressOnFinal(s.x);p.shortApproach=null;p.command=&#x27;Short approach - established final&#x27;}
+          }
+          return
+        }
+        if(p.upwindExtension){
+          const u=p.upwindExtension,q=pointOnPath(p.p),travel=pathTotal*.018*speed*activeSpeed*dt;
+          if(u.phase===&#x27;await&#x27;){
+            if(q.segment===0&amp;&amp;q.x&gt;=2040){p.upwindExtension={phase:&#x27;upwind&#x27;,x:q.x,y:1200,angle:0};p.command=&#x27;Extending upwind - normal speed&#x27;}
+            else p.p+=dt*.018*speed*activeSpeed
+          }else if(u.phase===&#x27;upwind&#x27;){
+            u.x+=travel;
+            if(u.x&gt;=2800){u.x=2800;u.phase=&#x27;crosswind&#x27;;u.angle=-90;p.command=&#x27;Five-mile point - turning left&#x27;}
+          }else if(u.phase===&#x27;crosswind&#x27;){
+            u.y-=travel;
+            if(u.y&lt;=300){u.y=300;u.phase=&#x27;joinDownwind&#x27;;u.angle=180;p.command=&#x27;Turning left toward downwind&#x27;}
+          }else if(u.phase===&#x27;joinDownwind&#x27;){
+            u.x-=travel;
+            if(u.x&lt;=2100){p.upwindExtension=null;p.p=progressAtVertex(3);p.mode=&#x27;pattern&#x27;;p.command=&#x27;Extended upwind complete - established downwind&#x27;}
+          }
+          return
+        }
+        if(p.extension){
+          const q=pointOnPath(p.p),travel=pathTotal*.018*speed*activeSpeed*dt;
+          if(p.extension.phase===&#x27;await&#x27;){
+            if(q.segment===3&amp;&amp;q.x&lt;=860){p.extension={phase:&#x27;downwind&#x27;,x:q.x,y:300,angle:180};p.command=&#x27;Flying extended downwind&#x27;}
+            else{p.p+=dt*.018*speed*activeSpeed}
+          }else if(p.extension.phase===&#x27;downwind&#x27;){
+            p.extension.x-=travel;
+            if(p.extension.x&lt;=550){p.extension.x=550;p.extension.phase=&#x27;base&#x27;;p.extension.angle=90;p.command=&#x27;Turning extended base&#x27;}
+          }else if(p.extension.phase===&#x27;base&#x27;){
+            p.extension.y+=travel;
+            if(p.extension.y&gt;=1200){p.extension.y=1200;p.extension.phase=&#x27;final&#x27;;p.extension.angle=0;p.command=&#x27;Extended base complete - turning final&#x27;}
+          }else if(p.extension.phase===&#x27;final&#x27;){
+            p.extension.x+=travel;
+            if(p.extension.x&gt;=850){p.extension=null;p.p=0;p.command=&#x27;Established on final&#x27;}
+          }
+          return
+        }
+        p.p+=dt*.018*speed*activeSpeed;
         const q=pointOnPath(p.p);
-        if(p.mode===&#x27;land&#x27;&amp;&amp;q.segment===0&amp;&amp;q.x&gt;=210){landed.push(i);return}
-        if(p.p&gt;=1){p.p-=1;if(p.mode===&#x27;touch&#x27;){p.command=&#x27;Touch and go complete&#x27;;p.mode=&#x27;pattern&#x27;}else if(p.mode===&#x27;low&#x27;){p.command=&#x27;Low approach complete&#x27;;p.mode=&#x27;pattern&#x27;}}
+        const atThreshold=q.segment===0&amp;&amp;q.x&gt;=1300;
+        if(!atThreshold)p.thresholdLatched=false;
+        if(atThreshold&amp;&amp;!p.thresholdLatched){
+          p.thresholdLatched=true;
+          if(p.mode===&#x27;land&#x27;){landed.push(i);return}
+          if(p.mode===&#x27;touch&#x27;&amp;&amp;!p.touchStarted){p.touchStarted=true;p.slowTimer=3;p.command=&#x27;Touch and go - 60% speed reduction&#x27;}
+          else resetApproachMemory(p);
+        }
+        if(p.p&gt;=1)p.p-=1;
       });
-      for(let n=landed.length-1;n&gt;=0;n--){const i=landed[n],p=planes[i];planes.splice(i,1);if(selected===i){selected=null;menu.hidden=true;detailCall.textContent=`${p.call} - ${p.type}`;detailText.textContent=&#x27;Landed and cleared from the simulation.&#x27;}else if(selected!==null&amp;&amp;selected&gt;i)selected--}
+      for(let n=landed.length-1;n&gt;=0;n--){const i=landed[n],p=planes[i];planes.splice(i,1);if(selected===i){selected=null;menuName.textContent=&#x27;Select an aircraft&#x27;;updateCommandState();detailCall.textContent=`${p.call} - ${p.type}`;detailText.textContent=&#x27;Landed and cleared from the simulation.&#x27;}else if(selected!==null&amp;&amp;selected&gt;i)selected--}
       renderPlanes();
     }
     requestAnimationFrame(tick)
   }
-  renderPlanes();requestAnimationFrame(tick);
+  updateSetup();renderPlanes();requestAnimationFrame(tick);
 })();
 &lt;/script&gt;
 
